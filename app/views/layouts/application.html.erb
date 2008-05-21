@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Simple Project Logger</title>
+  <%= stylesheet_link_tag 'scaffold' %>
+</head>
+<body>
+<div id="header_title">
+SProLog -- Simple Project Logger
+</div>
+<div id="header_details">
+<%  if ! session[:user].nil? %>
+User: <%= link_to session[:user].login, :controller => :users, :action => :show, :id => session[:user].id %>
+<%  end %>
+<%  if ! session[:project].nil? %>
+ -- Project: <%= link_to session[:project].name, :controller => :projects, :action => :show, :id => session[:project].id %>
+<%  end %>
+<%  if ! session[:task].nil? %>
+ -- Task: <%= link_to session[:task].number, :controller => :tasks, :action => :show, :id => session[:task].id %>
+<%  end %>
+</div>
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield  %>
+
+<hr/>
+<a href="/">Home</a>
+
+</body>
+</html>

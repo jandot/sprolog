@@ -1,0 +1,24 @@
+<div id="details">
+<table border="1">
+  <tr>
+    <th>Task number</th>
+    <th>Project</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Created at</th>
+    <th>Last updated at</th>
+  </tr>
+
+<% for task in @tasks %>
+  <tr>
+    <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id %></td>
+    <td><%=h task.project.name %></td>
+    <td><%=h task.description %></td>
+    <td><%=h task.status %></td>
+    <td><%=h task.created_at %></td>
+    <td><%=h task.updated_at %></td>
+
+  </tr>
+<% end %>
+</table>
+</div>

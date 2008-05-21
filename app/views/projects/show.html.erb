@@ -1,0 +1,50 @@
+<div id="general">
+<p>
+  <b>User:</b>
+  <%=h @project.user.name %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @project.name %>
+</p>
+
+<p>
+  <b>Description:</b><br/>
+  <%= word_wrap(@project.description, 60).gsub(/\n/, '<br/>') %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%=h @project.created_at %>
+</p>
+
+<p>
+  <b>Last updated at:</b>
+  <%=h @project.updated_at %>
+</p>
+
+<%= link_to 'Edit project details', edit_project_path(@project) %> | 
+<%= link_to 'Add task', :controller => :tasks, :action => :new %>
+</div>
+
+<div id="details">
+<h2>Tasks</h2>
+
+<table border="1">
+<tr>
+<th>Number</th>
+<th>Created at</th>
+<th>Name</th>
+<th>Status</th>
+</tr>
+<% @project.tasks.sort_by{|t| t.created_at}.reverse.each do |task| %>
+<tr>
+  <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id  %></td>
+  <td><%= task.created_at %></td>
+  <td><%= task.description.length > 50 ? task.description[0..50] + '...' : task.description %></td>
+  <td><%= task.status %></td>
+</tr>
+<% end %>
+</table>
+</div>

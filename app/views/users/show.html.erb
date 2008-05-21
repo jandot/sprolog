@@ -1,0 +1,22 @@
+<div id="details">
+<table border="1">
+<tr>
+  <th>Project</th>
+  <th>Total number of tasks</th>
+  <th>Number of open tasks</th>
+</tr>
+<% @user.projects.sort_by{|p| p.created_at}.reverse.each do |project|%>
+<tr>
+  <td><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id %></td>
+  <td align="center"><%= link_to project.tasks.length.to_s, :controller => :tasks, :action => :index, :project_id => project.id %></td>
+  <td align="center"><%= link_to project.open_tasks.length.to_s, :controller => :tasks, :action => :index, :project_id => project.id, :status_open => true %></td>
+</tr>
+
+<% end %>
+  
+</table>
+</div>
+<%= link_to 'New Project', :controller => :projects, :action => :new %>
+<p>
+<%= link_to 'Edit user details', :action => 'edit'%> | 
+<%= link_to 'Logout', "/logout" %>
