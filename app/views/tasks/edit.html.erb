@@ -4,8 +4,13 @@
 
 <% form_for(@task) do |f| %>
   <p>
-    <b>Description</b><br />
-    <%= f.text_area :description, :cols => 80, :rows => 5 %>
+    <b>Short description</b><br />
+    <%= f.text_area :short_description, :cols => 80, :rows => 5 %>
+  </p>
+
+  <p>
+    <b>Full description</b><br />
+    <%= f.text_area :full_description, :cols => 80, :rows => 25 %>
   </p>
 
   <p>

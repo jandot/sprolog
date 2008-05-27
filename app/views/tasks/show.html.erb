@@ -5,9 +5,16 @@
 </p>
 
 <p>
-  <b>Description:</b><br/>
-  <%= word_wrap(@task.description, 80).gsub(/\n/, '<br/>') %>
+  <b>Short description:</b><br/>
+  <%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %>
 </p>
+
+<% unless @task.full_description.nil? %>
+<p>
+  <b>Full description:</b><br/>
+  <%= word_wrap(@task.full_description, 80).gsub(/\n/, '<br/>') %>
+</p>
+<% end %>
 
 <p>
   <b>Status:</b>
@@ -50,3 +57,7 @@
 </p>
 <% end %>
 </div>
+
+<% if @task.status == 'open' %>
+ <%= link_to 'Add step', :controller => :steps, :action => :new %>
+<% end %>

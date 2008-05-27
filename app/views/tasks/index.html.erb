@@ -3,7 +3,7 @@
   <tr>
     <th>Task number</th>
     <th>Project</th>
-    <th>Description</th>
+    <th>Short description</th>
     <th>Status</th>
     <th>Created at</th>
     <th>Last updated at</th>
@@ -13,7 +13,7 @@
   <tr>
     <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id %></td>
     <td><%=h task.project.name %></td>
-    <td><%=h task.description %></td>
+    <td><%=h task.short_description %></td>
     <td><%=h task.status %></td>
     <td><%=h task.created_at %></td>
     <td><%=h task.updated_at %></td>

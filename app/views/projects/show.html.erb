@@ -42,7 +42,7 @@
 <tr>
   <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id  %></td>
   <td><%= task.created_at %></td>
-  <td><%= task.description.length > 50 ? task.description[0..50] + '...' : task.description %></td>
+  <td><%= task.short_description.length > 50 ? task.short_description[0..50] + '...' : task.short_description %></td>
   <td><%= task.status %></td>
 </tr>
 <% end %>
