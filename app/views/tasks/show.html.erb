@@ -1,13 +1,10 @@
 <div id="general">
-<p>
-  <b>Project:</b>
-  <b><%= link_to @task.project.name, :controller => :projects, :action => :show, :id => @task.project.id %></b>
-</p>
+<h2>Project:</h2>
+<b><%= link_to @task.project.name, :controller => :projects, :action => :show, :id => @task.project.id %></b>
 
-<p>
-  <b>Short description:</b><br/>
-  <%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %>
-</p>
+<h2>Short description:</h2>
+  <b><%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %></b>
+<hr>
 
 <% unless @task.full_description.nil? %>
 <p>
@@ -48,10 +45,10 @@
 </div>
 
 <div id="details">
-<h2>Steps taken in this task</h2>
+<h3>Steps taken in this task</h3>
 <% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
 <p>
-  <i>Recorded at <b><%= step.created_at.to_s %></b>:</i><br/>
+  <i>Recorded at <%= step.created_at.to_s %>:</i><br/>
   <%= RedCloth.new(step.description).to_html %>
   <hr/>
 </p>
