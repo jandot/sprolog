@@ -13,16 +13,19 @@ SProLog -- Simple Project Logger
 </div>
 <div id="header_details">
 <%  if ! session[:user].nil? %>
-User: <%= link_to session[:user].login, :controller => :users, :action => :show, :id => session[:user].id %>
+User: <%= link_to User.find(session[:user]).login, :controller => :users, :action => :show, :id => session[:user] %>
 <%  end %>
 <%  if ! session[:project].nil? %>
- -- Project: <%= link_to session[:project].name, :controller => :projects, :action => :show, :id => session[:project].id %>
+ -- Project: <%= link_to Project.find(session[:project]).name, :controller => :projects, :action => :show, :id => session[:project] %>
 <%  end %>
 <%  if ! session[:task].nil? %>
- -- Task: <%= link_to session[:task].number, :controller => :tasks, :action => :show, :id => session[:task].id %>
+ -- Task: <%= link_to Task.find(session[:task]).number, :controller => :tasks, :action => :show, :id => session[:task] %>
 <%  end %>
 </div>
+
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: orange"><%= flash[:message] %></p>
+<p style="color: red"><%= flash[:warning] %></p>
 
 <%= yield  %>
 

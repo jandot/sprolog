@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_filter :login_required, :only => [:show, :edit, :update, :destroy]
+  
   # render new.rhtml
   def new
   end
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
     session[:project] = nil
     session[:task] = nil
     @user = User.find(params[:id])
-    session[:user] = @user
+    session[:user] = @user.id
 
     respond_to do |format|
       format.html # show.html.erb

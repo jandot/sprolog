@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
+  before_filter :login_required
+
   # GET /tasks
   # GET /tasks.xml
   def index
     session[:task] = nil
     
     if params[:project_id]
-      session[:project] = Project.find(params[:project_id])
+      session[:project] = Project.find(params[:project_id]).id
       if params[:status_open]
         @tasks = Task.find_all_by_project_id_and_status(params[:project_id], 'open')
       else
@@ -25,7 +27,7 @@ class TasksController < ApplicationController
   # GET /tasks/1.xml
   def show
     @task = Task.find(params[:id])
-    session[:task] = @task
+    session[:task] = @task.id
 
     respond_to do |format|
       format.html # show.html.erb
@@ -52,7 +54,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.xml
   def create
-    params[:task]['project_id'] = session[:project].id
+    params[:task]['project_id'] = session[:project]
     params[:task]['status'] = 'open'
     params[:task]['created_at'] = Time.now
     params[:task]['updated_at'] = Time.now
@@ -73,7 +75,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.xml
   def update
-    params[:task]['project_id'] = session[:project].id
+    params[:task]['project_id'] = session[:project]
     params[:task]['updated_at'] = Time.now
     @task = Task.find(params[:id])
 

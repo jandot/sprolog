@@ -77,12 +77,16 @@ class SessionController < ApplicationController
   private
   
     def successful_login
+            logger.debug "===================="
+
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
     end
 
     def failed_login(message)
-      redirect_to(:action => 'login')
-      flash[:warning] = message
+      flash[:warning] = "Login unsuccessful. " + message
+      redirect_to('/login')
+      logger.debug "============ " + message + " ============="
+
     end
 end

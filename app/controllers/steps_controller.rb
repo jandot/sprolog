@@ -1,4 +1,6 @@
 class StepsController < ApplicationController
+  before_filter :login_required
+  
   # GET /steps
   # GET /steps.xml
   def index
@@ -40,7 +42,7 @@ class StepsController < ApplicationController
   # POST /steps
   # POST /steps.xml
   def create
-    params[:step]['task_id'] = session[:task].id
+    params[:step]['task_id'] = session[:task]
     params[:step]['created_at'] = Time.now
     params[:step]['updated_at'] = Time.now
     @step = Step.new(params[:step])
@@ -48,7 +50,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       if @step.save
         flash[:notice] = 'Step was successfully created.'
-        format.html { redirect_to :controller => :tasks, :action => :show, :id => session[:task].id }
+        format.html { redirect_to :controller => :tasks, :action => :show, :id => session[:task] }
         format.xml  { render :xml => @step, :status => :created, :location => @step }
       else
         format.html { render :action => "new" }
@@ -60,14 +62,14 @@ class StepsController < ApplicationController
   # PUT /steps/1
   # PUT /steps/1.xml
   def update
-    params[:step]['task_id'] = session[:task].id
+    params[:step]['task_id'] = session[:task]
     params[:step]['updated_at'] = Time.now
     @step = Step.find(params[:id])
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
         flash[:notice] = 'Step was successfully updated.'
-        format.html { redirect_to :controller => :tasks, :action => :show, :id => session[:task].id }
+        format.html { redirect_to :controller => :tasks, :action => :show, :id => session[:task] }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

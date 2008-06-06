@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :login_required
+
   # GET /projects
   # GET /projects.xml
   def index
@@ -44,7 +46,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.xml
   def create
-    params[:project]['user_id'] = session[:user].id
+    params[:project]['user_id'] = session[:user]
     params[:project]['created_at'] = Time.now
     params[:project]['updated_at'] = Time.now
     @project = Project.new(params[:project])
@@ -64,7 +66,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    params[:project]['user_id'] = session[:user].id
+    params[:project]['user_id'] = session[:user]
     params[:project]['updated_at'] = Time.now
     @project = Project.find(params[:id])
 
