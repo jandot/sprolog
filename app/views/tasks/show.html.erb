@@ -37,6 +37,7 @@
   <%=h @task.updated_at %>
 </p>
 
+<%= link_to 'Edit task details', edit_task_path(@task) %> | 
 <% if @task.status == 'open' %>
  <%= link_to 'Add step', :controller => :steps, :action => :new %>
 <% else %>
