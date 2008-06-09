@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
-    session[:project] = @project
+    session[:project] = @project.id
     session[:task] = nil
 
     respond_to do |format|
