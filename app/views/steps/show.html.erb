@@ -1,12 +1,12 @@
 <div id="general">
 <p>
   <b>Task:</b>
-  <%=h @step.task_id %>
+  <%= link_to @step.task.number, :controller => :tasks, :action => :show, :id => @step.task_id %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%=h @step.description %>
+  <%= RedCloth.new(@step.description).to_html %>
 </p>
 
 <p>
