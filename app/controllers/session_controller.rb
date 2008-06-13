@@ -38,7 +38,7 @@ class SessionController < ApplicationController
   protected
   
     def password_authentication(login, password)
-      if self.current_user = User.authenticate(params[:login], params[:password])
+      if self.current_user == User.authenticate(params[:login], params[:password])
         successful_login
       else
         failed_login("Invalid login or password")
