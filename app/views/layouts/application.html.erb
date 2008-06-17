@@ -5,11 +5,11 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Simple Project Logger</title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'application' %>
 </head>
 <body>
 <div id="header_title">
-SProLog -- Simple Project Logger
+SProLog <span id="sub_header">Simple Project Logger</span>
 </div>
 <div id="header_details">
 <%  if ! session[:user].nil? %>
@@ -30,7 +30,7 @@ User: <%= link_to User.find(session[:user]).login, :controller => :users, :actio
 <%= yield  %>
 
 <hr/>
-<a href="/">Home</a> | <a href="http://github.com/jandot/sprolog/wikis">Sprolog website</a><br/>
+<%= link_to "Home", home_path %> | <a href="http://github.com/jandot/sprolog/wikis">Sprolog website</a><br/>
 To submit a bug or request a feature, please go <a href="http://rubyforge.org/tracker/?group_id=5267">here</a>.
 
 </body>

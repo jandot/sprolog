@@ -29,12 +29,12 @@
 
 <p>
   <b>Created at:</b>
-  <%=h @task.created_at %>
+  <%=h nice_date(@task.created_at) %>
 </p>
 
 <p>
   <b>Last updated at:</b>
-  <%=h @task.updated_at %>
+  <%=h nice_date(@task.updated_at) %>
 </p>
 
 <%= link_to 'Edit task details', edit_task_path(@task) %> | 
@@ -49,7 +49,7 @@
 <h3>Steps taken in this task</h3>
 <% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
 <p>
-  <i>Step <%= step.id.to_s %>, recorded at <%= step.created_at.to_s %>:</i><br/>
+  <i><%= link_to "Step #{step.id}", step_path(step) %>, recorded at <%= nice_date(step.created_at) %>:</i><br/>
   <%= RedCloth.new(step.description).to_html %>
   <hr/>
 </p>

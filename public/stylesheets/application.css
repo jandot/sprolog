@@ -1,0 +1,68 @@
+/*-------------------- 
+	Basic
+---------------------*/
+body {
+	background: #F0F0F0 url(../images/banner.png) repeat-x;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000000;
+	padding: 0px 15px 0px 15px;
+}
+a {
+	color: #333;
+}
+.clear_all {
+	clear: both;
+}
+/*-------------------- 
+	Header 
+---------------------*/
+#header_title {
+	font-size: 28px;
+	font-weight: 900;
+	color: #FFFFFF;
+	padding: 20px 0px 15px 0px;
+}
+#sub_header {
+    font-weight: 500;
+    font-style: italic;
+}
+#header_details {
+    font-weight: bold;
+    color: #FFFFFF;
+	font-size: 14px;
+}
+#header_details a{
+    font-weight: normal;
+    color: #FFFFFF;
+}
+
+/*-------------------- 
+	Details 
+---------------------*/
+#details {
+ padding: 10px 10px 20px 10px;
+}
+.stripey{
+color: black;
+border: 2px solid black;
+border-collapse: collapse;
+}
+.stripey td, .stripey th{
+	padding: 5px 10px 5px 10px;
+	border: 1px solid #ccc;
+	}
+	.stripey th{
+	background: #6082F9;
+	}
+	.stripey td.new {
+	font-weight: bold;
+	}
+	.stripey tr.alt{
+	background: #CCD7FD;
+	}
+	
+#openid_url {
+  background: url(/images/login-bg.gif) no-repeat #FFF 5px;
+  padding-left: 25px;
+}
