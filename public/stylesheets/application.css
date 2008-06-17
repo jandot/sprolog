@@ -63,6 +63,6 @@ border-collapse: collapse;
 	}
 	
 #openid_url {
-  background: url(/images/login-bg.gif) no-repeat #FFF 5px;
+  background: url(../images/login-bg.gif) no-repeat #FFF 5px;
   padding-left: 25px;
 }

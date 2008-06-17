@@ -32,7 +32,7 @@ class SessionController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default('/')
+    redirect_back_or_default(home_path)
   end
 
   protected
@@ -79,7 +79,7 @@ class SessionController < ApplicationController
     def successful_login
             logger.debug "===================="
 
-      redirect_back_or_default('/')
+      redirect_back_or_default(home_path)
       flash[:notice] = "Logged in successfully"
     end
 

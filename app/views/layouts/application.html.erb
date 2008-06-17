@@ -21,6 +21,7 @@ User: <%= link_to User.find(session[:user]).login, :controller => :users, :actio
 <%  if ! session[:task].nil? %>
  -- Task: <%= link_to Task.find(session[:task]).number, :controller => :tasks, :action => :show, :id => session[:task] %>
 <%  end %>
+&nbsp;
 </div>
 
 <p style="color: green"><%= flash[:notice] %></p>
