@@ -6,7 +6,7 @@
   <b><%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %></b>
 <hr>
 
-<% unless @task.full_description.nil? %>
+<% unless @task.full_description.nil? || @task.full_description == ""%>
 <p>
   <b>Full description:</b><br/>
   <%= word_wrap(@task.full_description, 80).gsub(/\n/, '<br/>') %>

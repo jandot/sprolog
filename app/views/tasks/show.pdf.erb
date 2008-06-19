@@ -1,0 +1,31 @@
+<h2>Project: <%= @task.project.name %></h2>
+<h2>Short description:</h2>
+  <b><%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %></b>
+<hr>
+
+<% unless @task.full_description.nil? || @task.full_description == ""%>
+<p>
+  <b>Full description:</b><br/>
+  <%= word_wrap(@task.full_description, 80).gsub(/\n/, '<br/>') %>
+</p>
+<% end %>
+<p>
+  <b>Created at:</b><%=h nice_date(@task.created_at) %>
+</p>
+
+<p>
+  <b>Last updated at:</b><%=h nice_date(@task.updated_at) %>
+</p>
+
+<% if @task.status != 'open' %>
+<i>Task is closed or stalled. No new steps can be added.</i>
+<% end %>
+
+<h3>Steps taken in this task</h3>
+<% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
+<p>
+  <i>Step <%= step.id %>, recorded at <%= nice_date(step.created_at) %>:</i><br/>
+  <%= RedCloth.new(step.description).to_html %>
+  <hr/>
+</p>
+<% end %>
