@@ -16,12 +16,12 @@
 
 <p>
   <b>Created at:</b>
-  <%=h @project.created_at %>
+  <%=h nice_date(@project.created_at) %>
 </p>
 
 <p>
   <b>Last updated at:</b>
-  <%=h @project.updated_at %>
+  <%=h nice_date(@project.updated_at) %>
 </p>
 
 <%= link_to 'Edit project details', edit_project_path(@project) %> | 
@@ -41,7 +41,7 @@
 <% @project.tasks.sort_by{|t| t.created_at}.reverse.each do |task| %>
 <tr>
   <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id  %></td>
-  <td><%= task.created_at %></td>
+  <td><%= nice_date(task.created_at) %></td>
   <td><%= task.short_description.length > 50 ? task.short_description[0..50] + '...' : task.short_description %></td>
   <td><%= task.status %></td>
 </tr>

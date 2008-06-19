@@ -85,7 +85,7 @@ class SessionController < ApplicationController
 
     def failed_login(message)
       flash[:warning] = "Login unsuccessful. " + message
-      redirect_to('/login')
+      redirect_to('login_path')
       logger.debug "============ " + message + " ============="
 
     end
