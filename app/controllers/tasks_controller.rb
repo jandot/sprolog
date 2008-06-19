@@ -32,6 +32,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @task }
+      format.pdf { send_data render_to_pdf({ :action => 'show.pdf.erb', :layout => nil }) }
     end
   end
 
