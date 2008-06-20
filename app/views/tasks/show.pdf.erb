@@ -1,6 +1,5 @@
 <h2>Project: <%= @task.project.name %></h2>
-<h2>Short description:</h2>
-  <b><%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %></b>
+<h2><%= word_wrap(@task.short_description, 80).gsub(/\n/, '<br/>') %></h2>
 <hr>
 
 <% unless @task.full_description.nil? || @task.full_description == ""%>
@@ -21,7 +20,7 @@
 <i>Task is closed or stalled. No new steps can be added.</i>
 <% end %>
 
-<h3>Steps taken in this task</h3>
+<h4>Steps taken in this task</h4>
 <% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
 <p>
   <i>Step <%= step.id %>, recorded at <%= nice_date(step.created_at) %>:</i><br/>
