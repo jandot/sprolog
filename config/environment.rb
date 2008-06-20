@@ -2,7 +2,7 @@
 
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
-# ENV['RAILS_ENV'] ||= 'production'
+ENV['RAILS_ENV'] = 'development'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 #RAILS_GEM_VERSION = '2.0.1' unless defined? RAILS_GEM_VERSION
@@ -58,5 +58,9 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
 end
 
+# relative url stuff since app is on a sub_url
+RAILS_APPLICATION_PREFIX = 'sprolog'
+ActionController::AbstractRequest.relative_url_root = '/' + RAILS_APPLICATION_PREFIX
+# requrements for PDF
 Mime::Type.register 'application/pdf', :pdf
 require 'htmldoc'
