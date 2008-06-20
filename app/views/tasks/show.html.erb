@@ -45,6 +45,10 @@
 <% end %>
 </div>
 
+<div id="pdf">
+  <%= link_to 'Show as PDF', :action => :show, :format => 'pdf', :id => @task.id %>
+</div>
+
 <div id="details">
 <h3>Steps taken in this task</h3>
 <% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
