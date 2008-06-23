@@ -3,6 +3,10 @@ class Task < ActiveRecord::Base
   has_many :steps
 
   def number
-    return 'T' + self.project.id.to_s + '_' + self.id.to_s
+    # find the task number within the project not just the task id 
+    project_task_ids = Project.find(self.project).tasks.map{|t| t.id}
+    task_number = project_task_ids.index(self.id) + 1
+    
+    return 'T' + self.project.id.to_s + '_' + task_number.to_s
   end
 end
