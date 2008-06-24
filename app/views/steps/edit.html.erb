@@ -1,15 +1,4 @@
 <h1>Editing step</h1>
 
-<%= error_messages_for :step %>
+<%= render :partial => 'step' , :locals => {:button => "Update"} %>
 
-<% form_for(@step) do |f| %>
-
-  <p>
-    <b>Description</b><br />
-    <%= f.text_area :description, :cols => 120 %>
-  </p>
-
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
