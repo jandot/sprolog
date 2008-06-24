@@ -672,5 +672,4 @@ TextileEditor.Methods = {
 destination = TextileEditor
 source = TextileEditor.Methods
 for(var property in source) destination[property] = source[property];
-
 document.write('<script src="/sprolog/javascripts/textile-editor-config.js" type="text/javascript"></script>');
