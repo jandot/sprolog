@@ -17,6 +17,7 @@
     <td><%=h task.status %></td>
     <td><%=h task.created_at %></td>
     <td><%=h task.updated_at %></td>
+    <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>
 
   </tr>
 <% end %>
