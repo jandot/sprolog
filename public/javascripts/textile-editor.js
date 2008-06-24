@@ -124,7 +124,7 @@ TextileEditor.Methods = {
    	  theButton.setAttribute('open', button.open);
 
 		  var img = document.createElement('img');
-		  img.src = '/sprolog/images/textile-editor/' + button.display;
+		  img.src = '../../images/textile-editor/' + button.display;
 		  theButton.appendChild(img);
 	  } else {
 	    return button;
@@ -672,4 +672,4 @@ TextileEditor.Methods = {
 destination = TextileEditor
 source = TextileEditor.Methods
 for(var property in source) destination[property] = source[property];
-document.write('<script src="/sprolog/javascripts/textile-editor-config.js" type="text/javascript"></script>');
+//document.write('<script src="/sprolog/javascripts/textile-editor-config.js" type="text/javascript"></script>');

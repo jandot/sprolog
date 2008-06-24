@@ -82,10 +82,11 @@ class StepsController < ApplicationController
   # DELETE /steps/1.xml
   def destroy
     @step = Step.find(params[:id])
+    task = @step.task
     @step.destroy
 
     respond_to do |format|
-      format.html { redirect_to(steps_url) }
+      format.html { redirect_to(task_url(task)) }
       format.xml  { head :ok }
     end
   end
