@@ -1,0 +1,15 @@
+<%= error_messages_for :step %>
+You can use <%= link_to 'Textile', "http://hobix.com/textile/", :popup => true %> markup for the description.
+
+<% form_for(@step) do |f| %>
+
+  <p>
+    <b>Description</b><br />
+    <%= textile_editor :step,  :description, {:cols => 120} %>
+  </p>
+
+  <p>
+    <%= f.submit button %>
+  </p>
+  <%= textile_editor_initialize -%>
+<% end %>
