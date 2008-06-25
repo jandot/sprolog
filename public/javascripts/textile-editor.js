@@ -33,6 +33,8 @@ more on textile:
  - Textile Reference, http://hobix.com/textile/
 
 */
+/* Alert the followib=ng variable to match your application url*/
+var appURL = "/sprolog"
 
 // Define Button Object
 function TextileEditorButton(id, display, tagStart, tagEnd, access, title, sve, open) {
@@ -124,7 +126,7 @@ TextileEditor.Methods = {
    	  theButton.setAttribute('open', button.open);
 
 		  var img = document.createElement('img');
-		  img.src = '../../images/textile-editor/' + button.display;
+		  img.src = appURL + '/images/textile-editor/' + button.display;
 		  theButton.appendChild(img);
 	  } else {
 	    return button;
