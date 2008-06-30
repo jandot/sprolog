@@ -1,0 +1,19 @@
+<h1>New workflow</h1>
+
+<%= error_messages_for :workflow %>
+
+<% form_for(@workflow) do |f| %>
+  <p>
+    <b>Description</b><br />
+    <%= f.text_area :description, :rows => 5, :cols => 80 %>
+  </p>
+
+  <p>
+    <b>Graph</b><br />
+    <%= f.text_area :graph, :cols => 80 %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>

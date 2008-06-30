@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :users
   map.resources :projects
+  map.resources :workflows
   map.resources :tasks
   map.resources :steps
 
