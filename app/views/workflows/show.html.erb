@@ -18,7 +18,10 @@
 
 <p>
   <b>Graph:</b><br/>
-  <object data="data:image/svg+xml;base64,<%=Base64.encode64(@gvsvg)%>"/>
+      <img src="data:image/png;base64,<%=Base64.encode64(@gvpng)%>" usemap="#workflow_map"/>
+      <map name="workflow_map">
+      <%= @gvmap %>
+      </map>
 </p>
 
 

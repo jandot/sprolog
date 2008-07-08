@@ -17,10 +17,16 @@ class WorkflowsController < ApplicationController
   def show
     @workflow = Workflow.find(params[:id])
     
-    gv = IO.popen("/usr/local/bin/dot -q -Tsvg", "w+")
+    gv = IO.popen("/usr/local/bin/dot -q -Tpng", "w+")
     gv.puts "digraph G{", @workflow.graph, "}"
     gv.close_write
-    @gvsvg = gv.read
+    @gvpng = gv.read
+
+
+    gv = IO.popen("/usr/local/bin/dot -q -Tcmapx", "w+")
+    gv.puts "digraph G{", @workflow.graph, "}"
+    gv.close_write
+    @gvmap = gv.read
 
     respond_to do |format|
       format.html # show.html.erb
