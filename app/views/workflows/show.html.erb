@@ -1,0 +1,26 @@
+<div id="general">
+<h2>Project:</h2>
+<b><%= link_to @workflow.project.name, :controller => :projects, :action => :show, :id => @workflow.project.id %></b>
+
+<h2>Description:</h2>
+  <b><%= word_wrap(@workflow.description, 80).gsub(/\n/, '<br/>') %></b>
+<hr>
+
+<p>
+  <b>Created at:</b>
+  <%=h nice_date(@workflow.created_at) %>
+</p>
+
+<p>
+  <b>Last updated at:</b>
+  <%=h nice_date(@workflow.updated_at) %>
+</p>
+
+<p>
+  <b>Graph:</b><br/>
+  <object data="data:image/svg+xml;base64,<%=Base64.encode64(@gvsvg)%>"/>
+</p>
+
+
+<%= link_to 'Edit workflow details', edit_workflow_path(@workflow) %>
+</div>

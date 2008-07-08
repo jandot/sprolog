@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(:version => 10) do
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.string   "identity_url"
+  end
+
+  create_table "workflows", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "description"
+    t.string   "graph"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

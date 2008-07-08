@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :user
+  has_many :workflows
   has_many :tasks
 
   def open_tasks

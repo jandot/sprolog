@@ -25,10 +25,26 @@
 </p>
 
 <%= link_to 'Edit project details', edit_project_path(@project) %> | 
+<%= link_to 'Add workflow', :controller => :workflows, :action => :new %> | 
 <%= link_to 'Add task', :controller => :tasks, :action => :new %>
 </div>
 
 <div id="details">
+<h2>Workflows</h2>
+
+<table border="1">
+<tr>
+<th>Description</th>
+<th>Created at</th>
+</tr>
+<% @project.workflows.sort_by{|t| t.created_at}.reverse.each do |workflow| %>
+<tr>
+  <td><%= link_to workflow.description[0,20], :controller => :workflows, :action => :show, :id => workflow.id  %></td>
+  <td><%= nice_date(workflow.created_at) %></td>
+</tr>
+<% end %>
+</table>
+
 <h2>Tasks</h2>
 
 <table border="1">
