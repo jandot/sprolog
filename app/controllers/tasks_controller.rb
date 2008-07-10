@@ -96,11 +96,12 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.xml
   def destroy
     @task = Task.find(params[:id])
+    project = @task.project
     @task.destroy
     session[:task ] = nil
 
     respond_to do |format|
-      format.html { redirect_to(tasks_url) }
+      format.html { redirect_to(project_url(project)) }
       format.xml  { head :ok }
     end
   end
