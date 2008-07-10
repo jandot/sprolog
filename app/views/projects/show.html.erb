@@ -24,9 +24,11 @@
   <%=h nice_date(@project.updated_at) %>
 </p>
 
+<% if owner? %>
 <%= link_to 'Edit project details', edit_project_path(@project) %> | 
 <%= link_to 'Add workflow', :controller => :workflows, :action => :new %> | 
 <%= link_to 'Add task', :controller => :tasks, :action => :new %>
+<% end %>
 </div>
 
 <div id="details">

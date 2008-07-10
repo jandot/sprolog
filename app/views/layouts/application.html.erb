@@ -31,7 +31,7 @@ User: <%= link_to User.find(session[:user]).login, :controller => :users, :actio
 <%= yield  %>
 
 <hr/>
-<%= link_to "Home", home_path %> | <a href="http://github.com/jandot/sprolog/wikis">Sprolog website</a><br/>
+<%= link_to "Home", home_path %> | <%= link_to "RSS feed", formatted_steps_url(:rss) %> | <a href="http://github.com/jandot/sprolog/wikis">Sprolog website</a><br/>
 To submit a bug or request a feature, please go <a href="http://rubyforge.org/tracker/?group_id=5267">here</a>.
 
 </body>

@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :login_required
+  before_filter :ownership_required, :except => [:index]
 
   # GET /projects
   # GET /projects.xml

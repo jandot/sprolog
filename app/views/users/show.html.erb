@@ -16,7 +16,9 @@
   
 </table>
 </div>
+<% if owner? %>
 <%= link_to 'New Project', :controller => :projects, :action => :new %>
+<% end %>
 <p>
 <%= link_to 'Edit user details', :action => 'edit'%> | 
 <%= link_to 'Logout', logout_path %>

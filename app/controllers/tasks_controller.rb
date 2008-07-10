@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_filter :login_required
+  before_filter :ownership_required, :except => [:index, :show]
 
   # GET /tasks
   # GET /tasks.xml

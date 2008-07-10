@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_filter :login_required
+  before_filter :ownership_required, :except => [:index, :show]
   
   # GET /steps
   # GET /steps.xml
