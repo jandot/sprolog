@@ -37,7 +37,7 @@
   <%=h nice_date(@task.updated_at) %>
 </p>
 
-<%= link_to 'Edit task details', edit_task_path(@task) %> | 
+<%= link_to 'Edit task details', edit_task_path(@task) %> | <%= link_to "Destroy", @task, :confirm => 'Are you sure?', :method => :delete %> |
 <% if @task.status == 'open' %>
  <%= link_to 'Add step', :controller => :steps, :action => :new %>
 <% else %>
