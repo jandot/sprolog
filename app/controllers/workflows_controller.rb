@@ -17,14 +17,18 @@ class WorkflowsController < ApplicationController
   def show
     @workflow = Workflow.find(params[:id])
     
+    default_graph_settings = "node [shape=box,color=orange,style=filled];\n"
+    
+    @processed_graph = default_graph_settings + @workflow.graph + process_graph(@workflow)
+    
     gv = IO.popen("/usr/local/bin/dot -q -Tpng", "w+")
-    gv.puts "digraph G{", @workflow.graph, "}"
+    gv.puts "digraph G{", @processed_graph, "}"
     gv.close_write
     @gvpng = gv.read
 
 
     gv = IO.popen("/usr/local/bin/dot -q -Tcmapx", "w+")
-    gv.puts "digraph G{", @workflow.graph, "}"
+    gv.puts "digraph G{", @processed_graph, "}"
     gv.close_write
     @gvmap = gv.read
 
@@ -95,5 +99,24 @@ class WorkflowsController < ApplicationController
       format.html { redirect_to(workflows_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def process_graph(workflow)
+    url_string = ""
+    workflow.graph.scan(/"(\d+):\s(.+?)"/).uniq.each do |task_number, task_description|
+      task_id  = Task.id_from_number(task_number.to_i, workflow.project.id)
+      if task_id.nil?
+        url_string += "\"#{task_number}: #{task_description}\"[style=solid]\n"
+      else
+        task = Task.find(task_id)
+        url_string += "\"#{task_number}: #{task_description}\"[URL=\""
+        url_string += "/#{RAILS_APPLICATION_PREFIX}" if RAILS_APPLICATION_PREFIX
+        url_string += "/tasks/#{task_id}\""
+        url_string += ", color=red" if task.status == "stalled" # change colour if task stalled
+        url_string += ", color=green" if task.status == "closed" # change colour if task closed
+        url_string += "];\n"
+      end
+    end
+    return url_string
   end
 end

@@ -9,4 +9,15 @@ class Task < ActiveRecord::Base
     
     return 'T' + self.project.id.to_s + '_' + task_number.to_s
   end
+  
+  def self.id_from_number(number, project_id)
+    #find the task id based on the number of the id within a project
+    project = Project.find(project_id)
+    project_tasks = project.tasks.find(:all, :order=>"id")
+    if project_tasks[number-1].nil?
+      return nil
+    else
+      return project_tasks[number-1].id
+    end
+  end
 end
