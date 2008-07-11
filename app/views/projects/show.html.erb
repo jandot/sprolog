@@ -54,7 +54,7 @@
 <th>Name</th>
 <th>Status</th>
 </tr>
-<% @project.tasks.sort_by{|t| t.created_at}.reverse.each do |task| %>
+<% @project.tasks.sort_by{|t| t.status || t.created_at}.reverse.each do |task| %>
 <tr>
   <td><%= link_to task.number, :controller => :tasks, :action => :show, :id => task.id  %></td>
   <td><%= nice_date(task.created_at) %></td>
