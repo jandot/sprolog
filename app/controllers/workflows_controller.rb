@@ -110,6 +110,7 @@ class WorkflowsController < ApplicationController
       else
         task = Task.find(task_id)
         url_string += "\"#{task_number}. #{task_description}\"[URL=\""
+        url_string += "/#{RAILS_APPLICATION_PREFIX}" if RAILS_APPLICATION_PREFIX
         url_string += "/tasks/#{task_id}\""
         url_string += ", color=red" if task.status == "stalled" # change colour if task stalled
         url_string += ", color=orange" if task.status == "open" # change colour if task open
