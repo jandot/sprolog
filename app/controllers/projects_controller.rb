@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :login_required
+  before_filter :check_permissions, :only => [:edit, :destroy]
 
   # GET /projects
   # GET /projects.xml
@@ -92,6 +93,13 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(projects_url) }
       format.xml  { head :ok }
+    end
+  end
+  def check_permissions
+    project = Project.find(params[:id])
+    if !logged_in? || current_user != project.user
+      flash[:error] = "You do not have permission to edit this project!"
+      redirect_to project_path(project)
     end
   end
 end

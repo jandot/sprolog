@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
   before_filter :login_required
-  
+  before_filter :check_permissions, :only => [:edit, :destroy]
   # GET /steps
   # GET /steps.xml
   def index
@@ -88,6 +88,15 @@ class StepsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(task_url(task)) }
       format.xml  { head :ok }
+    end
+  end
+  def check_permissions
+    step = Step.find(params[:id])
+    task = step.task
+    project = task.project
+    if !logged_in? || current_user != project.user
+      flash[:error] = "You do not have permission to edit this step!"
+      redirect_to step_path(step)
     end
   end
 end

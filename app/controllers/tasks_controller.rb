@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :login_required
-
+  before_filter :check_permissions, :only => [:edit, :destroy]
   # GET /tasks
   # GET /tasks.xml
   def index
@@ -107,29 +107,30 @@ class TasksController < ApplicationController
   end
 
   def open_status
-    @task = Task.find(params[:id])
-    @task.status = 'open'
-    @task.steps.create(:description => 'Task reopened at ' + Time.now.to_s)
-    @task.updated_at = Time.now
-    @task.save
-    redirect_to :action => :show
+    change_status('open', 'Task reopened at')
   end
 
   def stall_status
+    change_status('stalled', 'Task stalled at')
+  end
+  
+  def close_status
+    change_status('closed', 'Task closed at')
+  end
+  def change_status(status, new_task_description)
     @task = Task.find(params[:id])
-    @task.status = 'stalled'
-    @task.steps.create(:description => 'Task stalled at ' + Time.now.to_s)
+    @task.status = status
+    @task.steps.create(:description => new_task_description + ' ' + Time.now.to_s)
     @task.updated_at = Time.now
     @task.save
     redirect_to :action => :show
   end
-  
-  def close_status
-    @task = Task.find(params[:id])
-    @task.status = 'closed'
-    @task.steps.create(:description => 'Task closed at ' + Time.now.to_s)
-    @task.updated_at = Time.now
-    @task.save
-    redirect_to :action => :show
+  def check_permissions
+    task = Task.find(params[:id])
+    project = task.project
+    if !logged_in? || current_user != project.user
+      flash[:error] = "You do not have permission to edit this task!"
+      redirect_to task_path(task)
+    end
   end
 end
