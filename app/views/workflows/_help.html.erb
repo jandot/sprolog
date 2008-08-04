@@ -1,0 +1,27 @@
+An example workflow:<br/>
+<pre>
+  "make list groceries" -> "go shopping"
+  "get money from ATM" -> "go shopping"
+  "go shopping" -> "prepare ingredients"
+  "prepare ingredients" -> cook
+  "heat oven" -> cook
+  cook -> eat
+</pre>
+
+As you create tasks for each of these parts in the workflow, adding the task 
+number in the front followed by a period shows the status of the task. For
+example:
+<pre>
+  "2. make list groceries" -> "3. go shopping"
+  "1. get money from ATM" -> "3. go shopping"
+  "3. go shopping" -> "prepare ingredients"
+  "prepare ingredients" -> cook
+  "4. heat oven" -> cook
+  cook -> eat
+</pre>
+
+
+<p>
+For information on how to write workflows, see 
+<a href="http://github.com/jandot/sprolog/wikis/tips-tricks">here</a>.
+</p>
