@@ -23,7 +23,7 @@
 <h4>Steps taken in this task</h4>
 <% @task.steps.sort_by{|s| s.created_at}.each do |step| %>
 <p>
-  <i>Step <%= step.number %>, recorded at <%= nice_date(step.created_at) %>:</i><br/>
+  <i>Step <%= step.id %>, recorded at <%= nice_date(step.created_at) %>:</i><br/>
   <%= RedCloth.new(step.description).to_html %>
   <hr/>
 </p>
