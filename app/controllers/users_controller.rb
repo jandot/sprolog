@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :login_required, :only => [:show, :edit, :update, :destroy]
-  
+  before_filter :check_permissions, :only => [:edit, :update, :destroy]
   # render new.rhtml
   def new
   end
@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    session[:user] = nil
     @users = User.find(:all)
 
     respond_to do |format|
@@ -40,7 +39,6 @@ class UsersController < ApplicationController
     session[:project] = nil
     session[:task] = nil
     @user = User.find(params[:id])
-    session[:user] = @user.id
 
     respond_to do |format|
       format.html # show.html.erb
@@ -111,4 +109,11 @@ class UsersController < ApplicationController
     end
   end
   
+  def check_permissions
+    user = User.find(params[:id])
+    if !logged_in? || current_user != user
+      flash[:error] = "You do not have permission to edit this user!"
+      redirect_to users_path
+    end
+  end
 end

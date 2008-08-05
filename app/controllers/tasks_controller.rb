@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions, :only => [:edit, :destroy]
+  before_filter :check_permissions, :only => [:new, :edit, :destroy]
   # GET /tasks
   # GET /tasks.xml
   def index
@@ -126,10 +126,14 @@ class TasksController < ApplicationController
     redirect_to :action => :show
   end
   def check_permissions
-    task = Task.find(params[:id])
-    project = task.project
+    if params[:id]
+      task = Task.find(params[:id])
+      project = task.project
+    else
+      project = Project.find(session[:project])
+    end
     if !logged_in? || current_user != project.user
-      flash[:error] = "You do not have permission to edit this task!"
+      flash[:error] = "You do not have permission to edit or create tasks in this project!"
       redirect_to task_path(task)
     end
   end

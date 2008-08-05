@@ -16,7 +16,8 @@
   
 </table>
 </div>
-<%= link_to 'New Project', :controller => :projects, :action => :new %>
+<% if current_user == @user %>
+  <%= link_to 'New Project', :controller => :projects, :action => :new %>
 <p>
-<%= link_to 'Edit user details', :action => 'edit'%> | 
+<%= link_to 'Edit user details', :action => 'edit'%> | <% end %>
 <%= link_to 'Logout', logout_path %>

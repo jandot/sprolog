@@ -22,6 +22,7 @@
       <%= @gvmap %>
 </p>
 
-
-<%= link_to 'Edit workflow details', edit_workflow_path(@workflow) %>
+<% if current_user == @workflow.project.user %>
+  <%= link_to 'Edit workflow details', edit_workflow_path(@workflow) %>
+<% end  %>
 </div>
