@@ -15,16 +15,19 @@
 
 <p>
   <b>Status:</b>
-  <%=h @task.status %> (
-  <% if @task.status == 'open' %>
-    <%= link_to 'Stall task', :controller => :tasks, :action => :stall_status, :id => @task.id %> | 
-    <%= link_to 'Close task', :controller => :tasks, :action => :close_status, :id => @task.id %>
-  <% elsif @task.status == 'stalled' %>
-    <%= link_to 'Reopen task', :controller => :tasks, :action => :open_status, :id => @task.id %>
-  <% elsif @task.status == 'closed' %>
-    <%= link_to 'Reopen task', :controller => :tasks, :action => :open_status, :id => @task.id %>
+  <%=h @task.status %> 
+  <% if current_user == @task.project.user %>
+    (
+    <% if @task.status == 'open' %>
+      <%= link_to 'Stall task', :controller => :tasks, :action => :stall_status, :id => @task.id %> | 
+      <%= link_to 'Close task', :controller => :tasks, :action => :close_status, :id => @task.id %>
+    <% elsif @task.status == 'stalled' %>
+      <%= link_to 'Reopen task', :controller => :tasks, :action => :open_status, :id => @task.id %>
+    <% elsif @task.status == 'closed' %>
+      <%= link_to 'Reopen task', :controller => :tasks, :action => :open_status, :id => @task.id %>
+    <% end %>
+    )
   <% end %>
-  )
 </p>
 
 <p>
@@ -36,12 +39,13 @@
   <b>Last updated at:</b>
   <%=h nice_date(@task.updated_at) %>
 </p>
-
-<%= link_to 'Edit task details', edit_task_path(@task) %> | <%= link_to "Destroy", @task, :confirm => 'Are you sure?', :method => :delete %> |
-<% if @task.status == 'open' %>
- <%= link_to 'Add step', :controller => :steps, :action => :new %>
-<% else %>
-<i>Task is closed or stalled. No new steps can be added.</i>
+<% if current_user == @task.project.user %>
+  <%= link_to 'Edit task details', edit_task_path(@task) %> | <%= link_to "Destroy", @task, :confirm => 'Are you sure?', :method => :delete %> |
+  <% if @task.status == 'open'%>
+   <%= link_to 'Add step', :controller => :steps, :action => :new %>
+  <% else %>
+  <i>Task is closed or stalled. No new steps can be added.</i>
+  <% end %>
 <% end %>
 </div>
 
@@ -59,7 +63,8 @@
 </p>
 <% end %>
 </div>
-
-<% if @task.status == 'open' %>
- <%= link_to 'Add step', :controller => :steps, :action => :new %>
+<% if current_user == @task.project.user %>
+  <% if @task.status == 'open' %>
+   <%= link_to 'Add step', :controller => :steps, :action => :new %>
+  <% end %>
 <% end %>

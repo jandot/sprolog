@@ -1,6 +1,6 @@
 class WorkflowsController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions, :only => [:edit, :destroy]
+  before_filter :check_permissions, :only => [:new, :edit, :destroy]
   # GET /workflows
   # GET /workflows.xml
   def index
@@ -121,10 +121,14 @@ class WorkflowsController < ApplicationController
     return url_string
   end
   def check_permissions
-    workflow = Workflow.find(params[:id])
-    project = workflow.project
+    if params[:id]
+      workflow = Workflow.find(params[:id])
+      project = workflow.project
+    else
+      project = Project.find(session[:project])
+    end
     if !logged_in? || current_user != project.user
-      flash[:error] = "You do not have permission to edit this workflow!"
+      flash[:error] = "You do not have permission to edit or create a workflow in this project!"
       redirect_to workflow_path(workflow)
     end
   end

@@ -23,10 +23,11 @@
   <b>Last updated at:</b>
   <%=h nice_date(@project.updated_at) %>
 </p>
-
-<%= link_to 'Edit project details', edit_project_path(@project) %> | 
-<%= link_to 'Add workflow', :controller => :workflows, :action => :new %> | 
-<%= link_to 'Add task', :controller => :tasks, :action => :new %>
+<% if current_user == @project.user %>
+  <%= link_to 'Edit project details', edit_project_path(@project) %> | 
+  <%= link_to 'Add workflow', :controller => :workflows, :action => :new %> | 
+  <%= link_to 'Add task', :controller => :tasks, :action => :new %>
+<% end %>
 </div>
 
 <div id="details">

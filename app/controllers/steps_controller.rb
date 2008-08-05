@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
   before_filter :login_required
-  before_filter :check_permissions, :only => [:edit, :destroy]
+  before_filter :check_permissions, :only => [:new,:edit, :destroy]
   # GET /steps
   # GET /steps.xml
   def index
@@ -91,11 +91,15 @@ class StepsController < ApplicationController
     end
   end
   def check_permissions
-    step = Step.find(params[:id])
-    task = step.task
+    if params[:id]
+      step = Step.find(params[:id])
+      task = step.task
+    else
+      task = Task.find(session[:task])
+    end
     project = task.project
     if !logged_in? || current_user != project.user
-      flash[:error] = "You do not have permission to edit this step!"
+      flash[:error] = "You do not have permission to edit or create steps in this project!"
       redirect_to step_path(step)
     end
   end
